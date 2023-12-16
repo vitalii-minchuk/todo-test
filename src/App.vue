@@ -1,6 +1,6 @@
 <template>
-  <main>
+  <v-app>
     <RouterView />
     <TheFooter />
-  </main>
+  </v-app>
 </template>

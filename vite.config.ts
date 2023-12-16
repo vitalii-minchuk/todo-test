@@ -7,6 +7,7 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import VueMacros from 'unplugin-vue-macros/vite'
 import VueRouter from 'unplugin-vue-router/vite'
+import Vuetify from 'vite-plugin-vuetify'
 import { VueRouterAutoImports } from 'unplugin-vue-router'
 
 export default defineConfig({
@@ -45,7 +46,10 @@ export default defineConfig({
       ],
       dts: true,
       dirs: [
-        './src/composables',
+        'src/composables',
+        'src/composables/**/',
+        'src/stores',
+        'src/stores/**/',
       ],
       vueTemplate: true,
     }),
@@ -53,6 +57,9 @@ export default defineConfig({
     // https://github.com/antfu/vite-plugin-components
     Components({
       dts: true,
+    }),
+    Vuetify({
+      autoImport: true,
     }),
   ],
 
