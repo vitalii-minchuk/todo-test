@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { TCreateTodoInput } from '~/api/todo/types'
 import { DEFAULT_CREATE_TODO_INPUT, createTodoSuccessMsg, defaultErrorMsg } from '~/constants'
-import { EFetchStatus } from '~/enums/fetch-status.enum'
+import { EFetchStatus } from '~/enums/fetch-status-enum'
 
 const input = reactive<TCreateTodoInput>({ ...DEFAULT_CREATE_TODO_INPUT })
 const fetchStatus = ref<EFetchStatus>(EFetchStatus.SUCCESS)
@@ -69,3 +69,4 @@ function onSubmit(): void {
     </v-card>
   </v-dialog>
 </template>
+~/enums/fetch-status-enum

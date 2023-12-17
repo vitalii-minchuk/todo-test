@@ -17,6 +17,6 @@ onMounted(() => {
 
 <template>
   <div>
-    <TodoItem v-for="todo in todoStore.getUsersTodos" :key="todo.id" :todo="todo" />
+    <TodoItem v-for="todo in todoStore.getFilteredTodos" :key="todo.id" :todo="todo" />
   </div>
 </template>

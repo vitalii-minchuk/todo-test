@@ -2,10 +2,13 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 import { createTodo, getAllTodos, getTodosByUserId, updateTodo } from '~/api/todo'
 import type { ITodo, ITodoWithLikes, TCreateTodoInput, TUpdateTodoInput } from '~/api/todo/types'
 import { ESessionStorageKey } from '~/enums/session-storage-key-enum'
+import { ETodosFilter } from '~/enums/todos-filter-enum'
 
 export interface ITodoStore {
   allTodos: ITodo[]
   usersTodos: ITodoWithLikes[]
+  textFilter: string
+  todosFilter: ETodosFilter
 }
 
 export const useTodoStore = defineStore({
@@ -13,8 +16,16 @@ export const useTodoStore = defineStore({
   state: (): ITodoStore => ({
     allTodos: [],
     usersTodos: [],
+    textFilter: '',
+    todosFilter: ETodosFilter.ALL,
   }),
   getters: {
+    getTextFilter(): string {
+      return this.textFilter
+    },
+    getTodosFilter(): ETodosFilter {
+      return this.todosFilter
+    },
     getAllTodos(): ITodo[] {
       return this.allTodos
     },
@@ -25,6 +36,23 @@ export const useTodoStore = defineStore({
       const userStore = useUserStore()
       return userStore.getCurrentUser?.id ?? null
     },
+    getFilteredTodos(): ITodoWithLikes[] {
+      let filteredTodos = this.getUsersTodos
+
+      if (this.getTextFilter)
+        filteredTodos = filteredTodos.filter(el => el.title.includes(this.getTextFilter))
+
+      if (this.getTodosFilter === ETodosFilter.COMPLETED)
+        filteredTodos = filteredTodos.filter(el => el.completed)
+
+      if (this.getTodosFilter === ETodosFilter.NOT_COMPLETED)
+        filteredTodos = filteredTodos.filter(el => !el.completed)
+
+      if (this.getTodosFilter === ETodosFilter.FAVORITE)
+        filteredTodos = filteredTodos.filter(el => el.isFavorite)
+
+      return filteredTodos
+    },
   },
   actions: {
     setAllTodos(todos: ITodo[]): void {
@@ -32,6 +60,12 @@ export const useTodoStore = defineStore({
     },
     setUsersTodos(todos: ITodoWithLikes[]): void {
       this.usersTodos = todos
+    },
+    setTextFilter(text: string): void {
+      this.textFilter = text
+    },
+    setTodosFilter(filter: ETodosFilter): void {
+      this.todosFilter = filter
     },
     addLikesToUsersTodos(todos: ITodo[], userId: number): ITodoWithLikes[] {
       const storedLikesAsString = sessionStorage.getItem(ESessionStorageKey.FAVORITES)

@@ -4,6 +4,7 @@ const modalsStore = useModalsStore()
 
 <template>
   <div>
+    <TodoFilters />
     <UserSelect />
     <UserInfo />
     <TodoList />

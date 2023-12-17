@@ -18,6 +18,7 @@ declare module 'vue' {
     TheInput: typeof import('./src/components/TheInput.vue')['default']
     TheNotifications: typeof import('./src/components/application/the-notifications.vue')['default']
     TheThemeBtn: typeof import('./src/components/application/the-theme-btn.vue')['default']
+    TodoFilters: typeof import('./src/components/todos/todo-filters.vue')['default']
     TodoItem: typeof import('./src/components/todos/todo-item.vue')['default']
     TodoList: typeof import('./src/components/todos/todo-list.vue')['default']
     UserInfo: typeof import('./src/components/user/user-info.vue')['default']

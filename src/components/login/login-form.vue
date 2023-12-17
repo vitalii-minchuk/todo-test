@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { DEFAULT_LOGIN_USER_INPUT, defaultErrorMsg, loginSuccessMsg } from '~/constants'
-import { EFetchStatus } from '~/enums/fetch-status.enum'
+import { EFetchStatus } from '~/enums/fetch-status-enum'
 import type { ILoginUserInput } from '~/types/login'
 
 const input = reactive<ILoginUserInput>({ ...DEFAULT_LOGIN_USER_INPUT })
@@ -80,3 +80,4 @@ function onSubmitWithoutCredentials() {
     auto-submit
   </v-btn>
 </template>
+~/enums/fetch-status-enum
