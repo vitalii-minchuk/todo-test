@@ -3,6 +3,7 @@ import { getAllUsers, getUserById } from '~/api/user'
 
 const { notifySuccess } = useNotify()
 const text = ref('')
+// if already exists check
 getAllUsers().then((res) => {
   console.log(res)
   notifySuccess('test')

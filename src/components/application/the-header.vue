@@ -1,6 +1,11 @@
 <template>
   <header>
-    header
+    <RouterLink :to="{ name: '/' }">
+      header
+    </RouterLink>
+    <RouterLink :to="{ name: '/todos/' }">
+      todos
+    </RouterLink>
     <a
       rel="noreferrer"
       href="https://github.com/vitalii-minchuk/todo-test"
