@@ -1,17 +1,17 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
 export interface IModalsStore {
-  test: boolean
+  createTodoModal: boolean
 }
 
 export const useModalsStore = defineStore({
   id: 'modals',
   state: (): IModalsStore => ({
-    test: false,
+    createTodoModal: false,
   }),
   getters: {
-    getTest(this): boolean {
-      return this.test
+    getCreateTodoModal(): boolean {
+      return this.createTodoModal
     },
   },
   actions: {
