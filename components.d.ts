@@ -13,5 +13,6 @@ declare module 'vue' {
     TheFooter: typeof import('./src/components/application/the-footer.vue')['default']
     TheHeader: typeof import('./src/components/application/the-header.vue')['default']
     TheInput: typeof import('./src/components/TheInput.vue')['default']
+    TheNotifications: typeof import('./src/components/application/the-notifications.vue')['default']
   }
 }

@@ -4,6 +4,7 @@ import App from './App.vue'
 import { vuetify } from './modules/vuetify'
 import './styles/main.css'
 import { store } from './modules/pinia'
+import { notifications } from './modules/notifications'
 
 const app = createApp(App)
 const router = createRouter({
@@ -12,4 +13,5 @@ const router = createRouter({
 app.use(router)
 app.use(vuetify)
 app.use(store)
+app.use(notifications)
 app.mount('#app')
