@@ -1,5 +1,5 @@
 import { useAuthStore } from '~/stores/auth'
-import type { TAppContext } from '~/types'
+import type { TAppContext } from '~/types/common'
 
 export const install: TAppContext = ({ router }) => {
   router.beforeEach(async (to, _, next) => {

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { defaultErrorMsg } from '~/constants'
+import { DEFAULT_LOGIN_USER_INPUT, defaultErrorMsg, loginSuccessMsg } from '~/constants'
 import { EFetchStatus } from '~/enums/fetch-status.enum'
+import type { ILoginUserInput } from '~/types/login'
 
-const userName = $ref('')
-const phone = $ref('')
+const input = reactive<ILoginUserInput>({ ...DEFAULT_LOGIN_USER_INPUT })
 const fetchStatus = ref<EFetchStatus>(EFetchStatus.SUCCESS)
 const { checkCredentials } = useCheckUserCredentials()
 const userStore = useUserStore()
@@ -11,12 +11,12 @@ const authStore = useAuthStore()
 const { notifyError, notifySuccess } = useNotify()
 const router = useRouter()
 
-const isLoading = computed(() => fetchStatus.value === EFetchStatus.PENDING)
-const isError = computed(() => fetchStatus.value === EFetchStatus.ERROR)
+const isLoading = computed<boolean>(() => fetchStatus.value === EFetchStatus.PENDING)
+const isError = computed<boolean>(() => fetchStatus.value === EFetchStatus.ERROR)
 
 function handleLoginSuccess() {
   authStore.setIsAuthenticated(true)
-  notifySuccess('tttrrt')
+  notifySuccess(loginSuccessMsg)
   fetchStatus.value = EFetchStatus.SUCCESS
   router.push('/todos')
 }
@@ -29,44 +29,41 @@ function handleLoginError(err: unknown) {
   notifyError(message)
   fetchStatus.value = EFetchStatus.ERROR
 }
+
 function onSubmit(): void {
   fetchStatus.value = EFetchStatus.PENDING
-  const input = { userName, phone }
-
-  checkCredentials(input).then((res) => {
-    if (res) {
-      userStore.setCurrentUser(res.id)
-      handleLoginSuccess()
-    }
-    else {
-      fetchStatus.value = EFetchStatus.ERROR
-    }
-  }).catch((err: unknown) => {
-    handleLoginError(err)
-  })
+  checkCredentials(input)
+    .then((res) => {
+      if (res) {
+        userStore.setCurrentUser(res.id)
+        handleLoginSuccess()
+      }
+      else {
+        fetchStatus.value = EFetchStatus.ERROR
+      }
+    })
+    .catch((err: unknown) => handleLoginError(err))
 }
 
 function onSubmitWithoutCredentials() {
   fetchStatus.value = EFetchStatus.PENDING
-  userStore.initUserStoreData().then(() => {
-    handleLoginSuccess()
-  }).catch((err) => {
-    handleLoginError(err)
-  })
+  userStore.initUserStoreData()
+    .then(() => handleLoginSuccess())
+    .catch(err => handleLoginError(err))
 }
 </script>
 
 <template>
   <v-form validate-on="submit lazy" @submit.prevent="onSubmit">
     <v-text-field
-      v-model="userName"
+      v-model="input.userName"
       label="User name"
-      @input="event => userName = event.target.value"
+      name="userName"
     />
     <v-text-field
-      v-model="phone"
+      v-model="input.phone"
       label="User name"
-      @input="event => phone = event.target.value"
+      name="phone"
     />
     <v-btn
       :loading="isLoading"

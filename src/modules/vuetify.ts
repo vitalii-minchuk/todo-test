@@ -1,6 +1,6 @@
 import { createVuetify } from 'vuetify'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
-import type { TAppContext } from '~/types'
+import type { TAppContext } from '~/types/common'
 
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'

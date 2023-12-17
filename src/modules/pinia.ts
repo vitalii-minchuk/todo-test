@@ -1,5 +1,5 @@
 import { createPinia } from 'pinia'
-import type { TAppContext } from '~/types'
+import type { TAppContext } from '~/types/common'
 
 // Setup Pinia
 // https://pinia.vuejs.org/
