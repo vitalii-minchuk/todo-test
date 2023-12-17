@@ -21,5 +21,6 @@ function onLogout(): void {
     <v-btn v-if="authStore.getIsAuthenticated" @click="onLogout">
       logout
     </v-btn>
+    <TheThemeBtn />
   </header>
 </template>

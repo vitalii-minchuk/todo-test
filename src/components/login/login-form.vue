@@ -76,7 +76,7 @@ function onSubmitWithoutCredentials() {
       errror
     </p>
   </v-form>
-  <v-btn @click="onSubmitWithoutCredentials">
+  <v-btn v-if="!isLoading" @click="onSubmitWithoutCredentials">
     auto-submit
   </v-btn>
 </template>
