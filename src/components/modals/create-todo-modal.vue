@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import type { TCreateTodoInput } from '~/api/todo/types'
-import { DEFAULT_CREATE_TODO_INPUT, createTodoSuccessMsg, defaultErrorMsg } from '~/constants'
+import {
+  DEFAULT_CREATE_TODO_INPUT,
+  createTodoSuccessMsg,
+  defaultErrorMsg,
+  invalidCredentialsMsg,
+} from '~/constants'
 import { EFetchStatus } from '~/enums/fetch-status-enum'
 
 const input = reactive<TCreateTodoInput>({ ...DEFAULT_CREATE_TODO_INPUT })
@@ -15,7 +20,7 @@ const isLoading = computed<boolean>(() => fetchStatus.value === EFetchStatus.PEN
 const isError = computed<boolean>(() => fetchStatus.value === EFetchStatus.ERROR)
 
 function onSubmit(): void {
-  if (!userStore.getCurrentUser?.id)
+  if (!userStore.getCurrentUser?.id || !input.title)
     return
 
   fetchStatus.value = EFetchStatus.PENDING
@@ -23,6 +28,7 @@ function onSubmit(): void {
     .then(() => {
       notifySuccess(createTodoSuccessMsg)
       fetchStatus.value = EFetchStatus.SUCCESS
+      modalsStore.closeModal('createTodoModal')
     })
     .catch((err: unknown) => {
       let message = defaultErrorMsg
@@ -39,15 +45,16 @@ function onSubmit(): void {
   <v-dialog
     v-model="modalsStore.getCreateTodoModal"
     width="auto"
+    close-on-back
   >
     <v-card>
       <v-card-text>
-        <v-form validate-on="submit lazy" @submit.prevent="onSubmit">
+        <v-form validate-on="input" @submit.prevent="onSubmit">
           <v-text-field
             v-model="input.title"
             label="Title:"
             name="title"
-            :rules="[fieldRules.required, fieldRules.lengthValue]"
+            :rules="[fieldRules.required]"
           />
           <v-btn
             :loading="isLoading"
@@ -57,13 +64,13 @@ function onSubmit(): void {
             text="Submit"
           />
           <p v-if="isError">
-            errror
+            {{ invalidCredentialsMsg }}
           </p>
         </v-form>
       </v-card-text>
       <v-card-actions>
         <v-btn color="primary" block @click="modalsStore.closeModal('createTodoModal')">
-          Close Dialog
+          Cancel
         </v-btn>
       </v-card-actions>
     </v-card>

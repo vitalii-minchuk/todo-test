@@ -11,6 +11,6 @@ const modalsStore = useModalsStore()
     <v-btn prepend-icon="mdi-plus" @click="modalsStore.openModal('createTodoModal')">
       add new
     </v-btn>
-    <CreateTodoModal />
+    <CreateTodoModal v-if="modalsStore.getCreateTodoModal" />
   </div>
 </template>

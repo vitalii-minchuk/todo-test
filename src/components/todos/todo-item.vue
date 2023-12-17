@@ -30,6 +30,7 @@ function onUpdate(): void {
 
 function toggleIsFavorite(): void {
   isFavorite.value ? todoStore.likeTodo(props.todo.id) : todoStore.dislikeTodo(props.todo.id)
+  props.todo.userId && todoStore.loadUsersTodos(props.todo.userId)
 }
 </script>
 

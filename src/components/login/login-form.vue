@@ -8,6 +8,7 @@ const fetchStatus = ref<EFetchStatus>(EFetchStatus.SUCCESS)
 const { checkCredentials } = useCheckUserCredentials()
 const userStore = useUserStore()
 const authStore = useAuthStore()
+const fieldRules = useFieldRules()
 const { notifyError, notifySuccess } = useNotify()
 const router = useRouter()
 
@@ -54,16 +55,18 @@ function onSubmitWithoutCredentials() {
 </script>
 
 <template>
-  <v-form validate-on="submit lazy" @submit.prevent="onSubmit">
+  <v-form validate-on="input lazy" @submit.prevent="onSubmit">
     <v-text-field
       v-model="input.userName"
       label="User name"
       name="userName"
+      :rules="[fieldRules.required, fieldRules.onlyLetters, fieldRules.lengthValue]"
     />
     <v-text-field
       v-model="input.phone"
-      label="User name"
+      label="Phone"
       name="phone"
+      :rules="[fieldRules.required, fieldRules.isPhone]"
     />
     <v-btn
       :loading="isLoading"
