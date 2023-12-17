@@ -1,7 +1,8 @@
 import type { IUser } from '~/api/user/types'
+import type { ILoginUserInput } from '~/types/login'
 
 export interface ICheckUserCredentialsComposition {
-  checkCredentials: ({ userName, phone }: { userName: string, phone: string }) => Promise<IUser | null>
+  checkCredentials: ({ userName, phone }: ILoginUserInput) => Promise<IUser | null>
 }
 
 export function useCheckUserCredentials(): ICheckUserCredentialsComposition {

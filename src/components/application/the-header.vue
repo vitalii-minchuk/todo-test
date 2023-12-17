@@ -1,13 +1,11 @@
 <script setup lang="ts">
 const authStore = useAuthStore()
+const userStore = useUserStore()
 const router = useRouter()
 
-function onLogin(): void {
-  authStore.login()
-  router.push('/todos')
-}
 function onLogout(): void {
   authStore.logout()
+  userStore.resetUserState()
   router.push('/login')
 }
 </script>
@@ -22,9 +20,6 @@ function onLogout(): void {
     </RouterLink>
     <v-btn v-if="authStore.getIsAuthenticated" @click="onLogout">
       logout
-    </v-btn>
-    <v-btn v-else @click="onLogin">
-      login
     </v-btn>
   </header>
 </template>
