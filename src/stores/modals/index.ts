@@ -1,24 +1,24 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
-export interface IModals {
+export interface IModalsStore {
   test: boolean
 }
 
 export const useModalsStore = defineStore({
   id: 'modals',
-  state: (): IModals => ({
+  state: (): IModalsStore => ({
     test: false,
   }),
   getters: {
-    getTest(): boolean {
+    getTest(this): boolean {
       return this.test
     },
   },
   actions: {
-    openModal(modal: keyof IModals): void {
+    openModal(modal: keyof IModalsStore): void {
       this[modal] = true
     },
-    closeModal(modal: keyof IModals): void {
+    closeModal(modal: keyof IModalsStore): void {
       this[modal] = false
     },
   },

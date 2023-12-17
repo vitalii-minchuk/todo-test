@@ -11,6 +11,6 @@ const router = createRouter({
 app.use(router)
 // Install modules under `modules/`
 Object.values(import.meta.glob<{ install: TAppContext }>('./modules/*.ts', { eager: true }))
-  .forEach(i => i.install?.({ app, router }))
+  .forEach(el => el.install?.({ app, router }))
 
 app.mount('#app')
