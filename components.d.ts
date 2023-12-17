@@ -15,5 +15,7 @@ declare module 'vue' {
     TheHeader: typeof import('./src/components/application/the-header.vue')['default']
     TheInput: typeof import('./src/components/TheInput.vue')['default']
     TheNotifications: typeof import('./src/components/application/the-notifications.vue')['default']
+    UserInfo: typeof import('./src/components/user/user-info.vue')['default']
+    UserSelect: typeof import('./src/components/user/user-select.vue')['default']
   }
 }

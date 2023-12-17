@@ -10,7 +10,7 @@ export const useAuthStore = defineStore({
     isAuthenticated: false,
   }),
   getters: {
-    getIsAuthenticated(this): boolean {
+    getIsAuthenticated(): boolean {
       return this.isAuthenticated
     },
   },

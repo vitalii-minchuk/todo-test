@@ -3,6 +3,7 @@
 
 <template>
   <div>
-    todos
+    <UserSelect />
+    <UserInfo />
   </div>
 </template>
