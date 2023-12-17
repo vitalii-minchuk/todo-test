@@ -1,13 +1,16 @@
 <script setup lang="ts">
-const modals = useModalsStore()
-const { x } = useMouse()
+import { getAllUsers, getUserById } from '~/api/user'
+
+getAllUsers().then((res) => {
+  console.log(res)
+})
+getUserById(2).then((res) => {
+  console.log(res)
+})
 </script>
 
 <template>
   <div>
-    <v-btn prepend-icon="mdi-plus" @click="modals.openModal('test')">
-      ok
-    </v-btn>
-    {{ modals.test }} {{ x }}
+    home page
   </div>
 </template>
