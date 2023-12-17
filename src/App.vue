@@ -1,6 +1,8 @@
 <template>
-  <main>
+  <v-app>
+    <TheHeader />
     <RouterView />
     <TheFooter />
-  </main>
+    <TheNotifications />
+  </v-app>
 </template>
