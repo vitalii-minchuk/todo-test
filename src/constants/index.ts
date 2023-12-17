@@ -1,2 +1,2 @@
 export * from './messages'
-export * from './static-data'
+export * from './default-data'

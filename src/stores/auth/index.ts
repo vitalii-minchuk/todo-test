@@ -1,22 +1,28 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
-export interface IAuth {
+export interface IAuthStore {
   isAuthenticated: boolean
 }
 
 export const useAuthStore = defineStore({
   id: 'auth',
-  state: (): IAuth => ({
-    isAuthenticated: true,
+  state: (): IAuthStore => ({
+    isAuthenticated: false,
   }),
   getters: {
-    getIsAuthenticated(): boolean {
+    getIsAuthenticated(this): boolean {
       return this.isAuthenticated
     },
   },
   actions: {
     setIsAuthenticated(value: boolean): void {
       this.isAuthenticated = value
+    },
+    login(): void {
+      this.setIsAuthenticated(true)
+    },
+    logout(): void {
+      this.setIsAuthenticated(false)
     },
   },
 })

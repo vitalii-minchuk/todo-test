@@ -13,7 +13,7 @@ export function useNotify(): INotifyComposition {
   const notifySuccess = (text: string, duration?: number) => {
     notify({
       type: 'success',
-      title: 'success',
+      title: 'Success:',
       text,
       duration,
     })
@@ -22,7 +22,7 @@ export function useNotify(): INotifyComposition {
   const notifyError = (text: string, duration?: number) => {
     notify({
       type: 'error',
-      title: 'error',
+      title: 'Error:',
       text,
       duration,
     })
@@ -31,7 +31,7 @@ export function useNotify(): INotifyComposition {
   const notifyWarning = (text: string, duration?: number) => {
     notify({
       type: 'warn',
-      title: 'warn',
+      title: 'Warn:',
       text,
       duration,
     })
@@ -40,7 +40,7 @@ export function useNotify(): INotifyComposition {
   const notifyInfo = (text: string, duration?: number) => {
     notify({
       type: 'info',
-      title: 'info',
+      title: 'Info:',
       text,
       duration,
     })

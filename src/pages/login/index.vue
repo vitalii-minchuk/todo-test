@@ -2,5 +2,5 @@
 </script>
 
 <template>
-  login page
+  <LoginForm />
 </template>
