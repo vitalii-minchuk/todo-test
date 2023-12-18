@@ -16,7 +16,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div class="todos-wrapper">
     <TodoItem v-for="todo in todoStore.getFilteredTodos" :key="todo.id" :todo="todo" />
   </div>
 </template>
+
+<style lang="scss">
+.todos-wrapper {
+  margin-top: -24px;
+  margin-left: -12px;
+  margin-right: -12px;
+  display: flex;
+  flex-wrap: wrap;
+}
+</style>

@@ -14,16 +14,24 @@ function onSelectTodoFilter(value: ETodosFilter): void {
 </script>
 
 <template>
-  <v-select
-    v-model="todoFilter"
-    label="Todos filter:"
-    :items="Object.values(ETodosFilter)"
-    @update:model-value="onSelectTodoFilter"
-  />
-  <v-text-field
-    v-model="text"
-    label="Search"
-    name="textFilter"
-    @update:model-value="onChangeText"
-  />
+  <v-row>
+    <v-col cols="12" md="6">
+      <v-select
+        v-model="todoFilter"
+        label="Todos filter:"
+        variant="outlined"
+        :items="Object.values(ETodosFilter)"
+        @update:model-value="onSelectTodoFilter"
+      />
+    </v-col>
+    <v-col cols="12" md="6">
+      <v-text-field
+        v-model="text"
+        label="Search"
+        variant="outlined"
+        name="textFilter"
+        @update:model-value="onChangeText"
+      />
+    </v-col>
+  </v-row>
 </template>

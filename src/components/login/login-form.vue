@@ -79,12 +79,17 @@ function onSubmitWithoutCredentials() {
           type="submit"
           block
           class="mb-4"
-          text="Submit"
+          text="Register"
         />
 
-        <v-btn v-if="!isLoading" block type="button" @click="onSubmitWithoutCredentials">
-          auto-submit
-        </v-btn>
+        <v-btn
+          v-if="!isLoading"
+          variant="plain"
+          block
+          text="auto-submit *(without credentials)"
+          type="button"
+          @click="onSubmitWithoutCredentials"
+        />
       </v-col>
     </v-form>
     <p v-if="isError" class="text-red text-center">

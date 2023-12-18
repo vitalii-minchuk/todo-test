@@ -44,7 +44,7 @@ function onSubmit(): void {
 <template>
   <v-dialog
     :model-value="modalsStore.getCreateTodoModal"
-    width="auto"
+    width="320"
     persistent
   >
     <v-card>
@@ -54,6 +54,7 @@ function onSubmit(): void {
             v-model="input.title"
             label="Title:"
             name="title"
+            variant="outlined"
             :rules="[fieldRules.required]"
           />
           <v-btn
@@ -69,7 +70,11 @@ function onSubmit(): void {
         </v-form>
       </v-card-text>
       <v-card-actions>
-        <v-btn color="primary" block @click="modalsStore.closeModal('createTodoModal')">
+        <v-btn
+          :disabled="isLoading"
+          block
+          @click="modalsStore.closeModal('createTodoModal')"
+        >
           Cancel
         </v-btn>
       </v-card-actions>

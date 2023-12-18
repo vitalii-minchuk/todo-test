@@ -36,24 +36,31 @@ function toggleIsFavorite(): void {
 </script>
 
 <template>
-  <v-card width="200" height="100">
-    <v-tooltip
-      v-model="showTooltip"
-      location="top"
-    >
-      <span>{{ props.todo.title }}</span>
-    </v-tooltip>
+  <v-col cols="12" md="6">
+    <v-card height="100" :loading="isLoading">
+      <template #subtitle>
+        <p @on-hover="showTooltip = true">
+          {{ props.todo.title }}
+        </p>
+      </template>
 
-    <template #subtitle>
-      <p @on-hover="showTooltip = true">
-        {{ props.todo.title }}
-      </p>
-    </template>
-
-    <template #text>
-      <v-checkbox v-model="completed" label="Completed" :disabled="isLoading" @update:model-value="onUpdate" />
-
-      <v-checkbox v-model="isFavorite" true-icon="mdi-heart" :disabled="isLoading" @update:model-value="toggleIsFavorite" />
-    </template>
-  </v-card>
+      <template #text>
+        <div class="d-flex justify-between items-center">
+          <v-checkbox
+            v-model="completed"
+            label="Completed"
+            :disabled="isLoading"
+            @update:model-value="onUpdate"
+          />
+          <v-checkbox
+            v-model="isFavorite"
+            true-icon="mdi-thumb-up"
+            false-icon="mdi-thumb-up-outline"
+            :disabled="isLoading"
+            @update:model-value="toggleIsFavorite"
+          />
+        </div>
+      </template>
+    </v-card>
+  </v-col>
 </template>
