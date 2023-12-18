@@ -11,6 +11,8 @@ export function useTheme(): IThemeComposition {
   const toggleDark = useToggle(isDark)
 
   const theme = useThemeVuetify()
+
+  // change apps theme - taken from vueuse docs
   const toggleTheme = () => {
     toggleDark()
     theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'

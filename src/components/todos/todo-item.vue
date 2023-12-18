@@ -16,6 +16,9 @@ const showTooltip = ref(false)
 
 const isLoading = computed<boolean>(() => fetchStatus.value === EFetchStatus.PENDING)
 
+// show loader and update current todo (only completed property can be changed)
+// in cases of success and error show appropriate notification
+// use "finally" to se fetch state to success state (default)
 function onUpdate(): void {
   fetchStatus.value = EFetchStatus.PENDING
   todoStore.updateTodo({
@@ -29,6 +32,7 @@ function onUpdate(): void {
     .finally(() => fetchStatus.value = EFetchStatus.SUCCESS)
 }
 
+// like or dislike todo and refetch data to keep consistency
 function toggleIsFavorite(): void {
   isFavorite.value ? todoStore.likeTodo(props.todo.id) : todoStore.dislikeTodo(props.todo.id)
   props.todo.userId && todoStore.loadUsersTodos(props.todo.userId)

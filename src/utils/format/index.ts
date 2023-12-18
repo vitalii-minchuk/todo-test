@@ -1,5 +1,6 @@
 import type { IUser } from '~/api/user/types'
 
+// formate string to "[ID 5]: John Dow ('Nickname')"
 export function getFormattedUserNameWithID(user: IUser | null) {
   if (!user)
     return ''

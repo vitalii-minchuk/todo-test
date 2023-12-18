@@ -7,6 +7,7 @@ import 'vuetify/styles'
 
 const isDark = useDark()
 
+// configure vuetify (more on https://vuetifyjs.com/)
 export const install: TAppContext = ({ app }) => {
   const vuetify = createVuetify({
     icons: {

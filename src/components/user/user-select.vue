@@ -7,6 +7,10 @@ const todoStore = useTodoStore()
 const { notifyError } = useNotify()
 const selectedUserId = ref(userStore.getCurrentUser?.id)
 
+// immediate return without user id
+// set current user and load users todos
+// check weather error has message, if so show it, otherwise use default error message
+// show error notification,
 function onSelectUser() {
   if (!selectedUserId.value)
     return

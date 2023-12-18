@@ -31,10 +31,12 @@ export const useTodoStore = defineStore({
     getUsersTodos(): ITodoWithLikes[] {
       return this.usersTodos
     },
+    // need for manipulations with todos
     getCurrentUserId(): number | null {
       const userStore = useUserStore()
       return userStore.getCurrentUser?.id ?? null
     },
+    // filter list of todos according text filter or selected properties
     getFilteredTodos(): ITodoWithLikes[] {
       let filteredTodos = this.getUsersTodos
 
@@ -66,6 +68,8 @@ export const useTodoStore = defineStore({
     setTodosFilter(filter: ETodosFilter): void {
       this.todosFilter = filter
     },
+    // when loading list of todos get likes from session storage
+    // check which ones todos have been liked and set correct "isFavorite" property
     addLikesToUsersTodos(todos: ITodo[], userId: number): ITodoWithLikes[] {
       const storedLikesAsString = sessionStorage.getItem(ESessionStorageKey.FAVORITES)
       const storedLikes = storedLikesAsString ? JSON.parse(storedLikesAsString) : {}
@@ -75,6 +79,12 @@ export const useTodoStore = defineStore({
         return ({ ...el, isFavorite })
       })
     },
+    // immediate return without user id
+    // get likes from session storage and parse or use an empty object if storage is empty
+    // check weather user id (as key) already exists
+    // if so add like by pushing todos id into array (as value)
+    // if there is no such a key - create an empty array and do th same
+    // set likes back to the session storage "JSON.stringify" before
     likeTodo(todoId: number): void {
       if (!this.getCurrentUserId)
         return
@@ -93,6 +103,11 @@ export const useTodoStore = defineStore({
       const updatedLikesAsString = JSON.stringify(storedLikes)
       sessionStorage.setItem(ESessionStorageKey.FAVORITES, updatedLikesAsString)
     },
+    // immediate return without user id
+    // get likes from session storage and parse or use an empty object if storage is empty
+    // remove todo  from array by filtering
+    // if array left empty - remove user id (as key) from likes object
+    // set likes back to the session storage "JSON.stringify" before
     dislikeTodo(todoId: number): void {
       if (!this.getCurrentUserId)
         return
@@ -117,20 +132,27 @@ export const useTodoStore = defineStore({
         sessionStorage.setItem(ESessionStorageKey.FAVORITES, updatedLikesAsString)
       }
     },
+    // needs to avoid extra api calls
     checkExistingUsersTodos(userId: number): boolean {
       return Boolean(this.getUsersTodos.length && this.getUsersTodos[0].userId === userId)
     },
+    // create new todo
     async createTodo(input: TCreateTodoInput): Promise<void> {
       await createTodo(input)
     },
+    // update todo
     async updateTodo(input: TUpdateTodoInput): Promise<void> {
       await updateTodo(input)
     },
+    // load all the todos (is not used)
     async loadAllTodos(): Promise<void> {
       const todos = await getAllTodos()
 
       this.setAllTodos(todos?.data ?? [])
     },
+    // load todos by user id
+    // add likes and set todos to state
+    // return in case of api error
     async loadUsersTodos(userId: number): Promise<void> {
       if (!userId)
         return
@@ -144,6 +166,7 @@ export const useTodoStore = defineStore({
 
       this.setUsersTodos(todosWithLikes)
     },
+    // set state to default
     resetTodoState(): void {
       this.allTodos = []
       this.usersTodos = []

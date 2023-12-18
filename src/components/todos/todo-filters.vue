@@ -5,9 +5,12 @@ const todoStore = useTodoStore()
 const text = ref('')
 const todoFilter = ref(todoStore.getTodosFilter)
 
+// set text filter to show only todos, which have matches in titles
 function onChangeText(value: string): void {
   todoStore.setTextFilter(value)
 }
+
+// set filter to show only todos, which have appropriate property
 function onSelectTodoFilter(value: ETodosFilter): void {
   todoStore.setTodosFilter(value)
 }

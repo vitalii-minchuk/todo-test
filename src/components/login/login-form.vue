@@ -15,6 +15,10 @@ const router = useRouter()
 const isLoading = computed<boolean>(() => fetchStatus.value === EFetchStatus.PENDING)
 const isError = computed<boolean>(() => fetchStatus.value === EFetchStatus.ERROR)
 
+// in case of successful "login"
+// set is auth, show success notification,
+// set fetch status to success (default)
+// redirect user to todos page
 function handleLoginSuccess() {
   authStore.setIsAuthenticated(true)
   notifySuccess(loginSuccessMsg)
@@ -22,6 +26,10 @@ function handleLoginSuccess() {
   router.push('/todos')
 }
 
+// in case of error
+// check weather error has message, if so show it, otherwise use default error message
+// show error notification,
+// set fetch status to error in order to show error text
 function handleLoginError(err: unknown) {
   let message = defaultErrorMsg
   if (err instanceof Error && err?.message)
@@ -31,6 +39,11 @@ function handleLoginError(err: unknown) {
   fetchStatus.value = EFetchStatus.ERROR
 }
 
+// set loading state and check users credentials
+// if data is incorrect show error text
+// also handle request errors
+// in case of success set current user according to credentials
+// use success handler function
 function onSubmit(): void {
   fetchStatus.value = EFetchStatus.PENDING
   checkCredentials(input)
@@ -46,6 +59,10 @@ function onSubmit(): void {
     .catch((err: unknown) => handleLoginError(err))
 }
 
+// an easy way to login
+// show loading state
+// fetch all the users and set the first one as current user
+// handle positive and negative cases
 function onSubmitWithoutCredentials() {
   fetchStatus.value = EFetchStatus.PENDING
   userStore.initUserStoreData()

@@ -3,6 +3,7 @@ const authStore = useAuthStore()
 const userStore = useUserStore()
 const router = useRouter()
 
+// set is not auth, reset users data and redirect user to login page
 function onLogout(): void {
   authStore.logout()
   userStore.resetUserState()
