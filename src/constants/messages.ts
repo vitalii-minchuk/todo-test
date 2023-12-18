@@ -1,3 +1,5 @@
+// all the messages should be kept in one place, because it is easy to maintain them
+
 export const notFoundMsg = 'Not found'
 
 export const defaultErrorMsg = 'Something went wrong'

@@ -19,6 +19,15 @@ const { notifyError, notifySuccess } = useNotify()
 const isLoading = computed<boolean>(() => fetchStatus.value === EFetchStatus.PENDING)
 const isError = computed<boolean>(() => fetchStatus.value === EFetchStatus.ERROR)
 
+// return when no title value or current user id
+// show loader, add user id to input
+// in positive case show success notification,
+// set fetch status to success (default)
+// close modal
+// in case of error
+// check weather error has message, if so show it, otherwise use default error message
+// show error notification,
+// set fetch status to error in order to show error text
 function onSubmit(): void {
   if (!userStore.getCurrentUser?.id || !input.title)
     return

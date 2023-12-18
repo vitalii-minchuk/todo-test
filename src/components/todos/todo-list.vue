@@ -2,15 +2,16 @@
 const todoStore = useTodoStore()
 const userStore = useUserStore()
 
+// immediate return without user id
+// check if todos already exist to avoid extra requests
+// load users todos
 onMounted(() => {
   if (!userStore.getCurrentUser?.id)
     return
 
-  // check if todos already exist to avoid extra requests
   if (todoStore.checkExistingUsersTodos(userStore.getCurrentUser.id))
     return
 
-  // load users todos
   todoStore.loadUsersTodos(userStore.getCurrentUser.id)
 })
 </script>

@@ -9,6 +9,8 @@ export interface INotifyComposition {
   notifyInfo: (text: string, duration?: number) => void
 }
 
+// need to show app notifications
+// for details read '@kyvg/vue3-notification' docs
 export function useNotify(): INotifyComposition {
   const notifySuccess = (text: string, duration?: number) => {
     notify({

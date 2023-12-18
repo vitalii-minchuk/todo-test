@@ -1,5 +1,6 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
+// list of modals
 export interface IModalsStore {
   createTodoModal: boolean
 }
@@ -14,6 +15,7 @@ export const useModalsStore = defineStore({
       return this.createTodoModal
     },
   },
+  // open and close modals using key
   actions: {
     openModal(modal: keyof IModalsStore): void {
       this[modal] = true

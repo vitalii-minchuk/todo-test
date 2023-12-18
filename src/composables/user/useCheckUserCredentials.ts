@@ -7,7 +7,16 @@ export interface ICheckUserCredentialsComposition {
 
 export function useCheckUserCredentials(): ICheckUserCredentialsComposition {
   const userStore = useUserStore()
-  const checkCredentials = async ({ userName, phone }: { userName: string, phone: string }): Promise<IUser | null> => {
+
+  // function checks users credentials and return ether user data or null
+  // if user name and phone are not provided return null
+  // wait for loading all the users
+  // when something went wrong with user-list return null
+  // find user with given credentials
+  // return user when found one and null if not
+  const checkCredentials = async (
+    { userName, phone }: { userName: string, phone: string },
+  ): Promise<IUser | null> => {
     if (!userName || !phone)
       return null
 
@@ -25,5 +34,6 @@ export function useCheckUserCredentials(): ICheckUserCredentialsComposition {
 
     return user
   }
+
   return { checkCredentials }
 }
