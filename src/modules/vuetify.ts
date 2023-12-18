@@ -19,6 +19,11 @@ export const install: TAppContext = ({ app }) => {
     theme: {
       defaultTheme: isDark.value ? 'dark' : 'light',
     },
+    defaults: {
+      VBtn: {
+        style: 'text-transform: none;',
+      },
+    },
   })
 
   app.use(vuetify)

@@ -3,7 +3,7 @@ import { notFoundMsg } from '~/constants'
 </script>
 
 <template>
-  <div>
+  <v-container>
     {{ notFoundMsg }}
-  </div>
+  </v-container>
 </template>

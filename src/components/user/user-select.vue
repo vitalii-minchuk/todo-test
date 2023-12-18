@@ -27,6 +27,7 @@ function onSelectUser() {
     v-model="selectedUserId"
     label="User:"
     item-value="id"
+    variant="outlined"
     :item-title="$event => getFormattedUserNameWithID($event)"
     :items="userStore.getAllUsers"
     @update:model-value="onSelectUser"

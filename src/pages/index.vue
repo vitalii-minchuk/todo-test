@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     Home page
-  </div>
+  </v-container>
 </template>

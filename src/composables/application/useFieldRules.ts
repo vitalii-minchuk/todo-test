@@ -1,31 +1,29 @@
+import { fieldRequiredMsg, invalidPhoneMsg, lettersOnlyMsg, longTextMsg } from '~/constants'
+
 export interface IFieldRulesComposition {
   required: (v: string | number) => boolean | string
-  isNumber: (v: string) => boolean | string
+  onlyLetters: (v: string) => boolean | string
+  isPhone: (v: string) => boolean | string
   lengthValue: (v: string, maxLength?: number) => boolean | string
-  isPositiveIntegerNumber: (v: string) => boolean | string
-  isEmail: (v: string) => boolean | string
 }
 
 export function useFieldRules(): IFieldRulesComposition {
-  const required = (v: string | number) => (!!v || v === 0) || 'validation.required'
+  const required = (v: string | number) => (!!v || v === 0) || fieldRequiredMsg
 
-  const lengthValue = (v: string, maxLength = 255) => v?.length <= maxLength || 'validation.lengthValue'
+  const lengthValue = (v: string, maxLength = 255) => v?.length <= maxLength || longTextMsg
 
-  const isNumber = (v: string) => !Number.isNaN(+v) || 'validation.number'
-
-  const isPositiveIntegerNumber = (v: string) => {
-    return ((Number(v) >= 0) && Number(v) % 1 === 0) || 'validation.positiveIntegerNumber'
+  const onlyLetters = (v: string) => {
+    return /^[a-zA-Z]+$/.test(v) || lettersOnlyMsg
   }
 
-  const isEmail = (v: string) => {
-    return /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(v) || 'validation.validateEmail'
+  const isPhone = (v: string) => {
+    return /^[\d\-x\s]+$/.test(v) || invalidPhoneMsg
   }
 
   return {
     required,
-    isNumber,
+    onlyLetters,
     lengthValue,
-    isPositiveIntegerNumber,
-    isEmail,
+    isPhone,
   }
 }

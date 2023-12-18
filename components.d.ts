@@ -7,7 +7,6 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    'CreateTodo.modal': typeof import('./src/components/modals/create-todo.modal.vue')['default']
     CreateTodoModal: typeof import('./src/components/modals/create-todo-modal.vue')['default']
     LoginForm: typeof import('./src/components/login/login-form.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
@@ -15,7 +14,6 @@ declare module 'vue' {
     TheCounter: typeof import('./src/components/application/the-counter.vue')['default']
     TheFooter: typeof import('./src/components/application/the-footer.vue')['default']
     TheHeader: typeof import('./src/components/application/the-header.vue')['default']
-    TheInput: typeof import('./src/components/TheInput.vue')['default']
     TheNotifications: typeof import('./src/components/application/the-notifications.vue')['default']
     TheThemeBtn: typeof import('./src/components/application/the-theme-btn.vue')['default']
     TodoFilters: typeof import('./src/components/todos/todo-filters.vue')['default']

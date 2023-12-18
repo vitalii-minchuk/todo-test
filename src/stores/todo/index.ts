@@ -1,8 +1,7 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { createTodo, getAllTodos, getTodosByUserId, updateTodo } from '~/api/todo'
 import type { ITodo, ITodoWithLikes, TCreateTodoInput, TUpdateTodoInput } from '~/api/todo/types'
-import { ESessionStorageKey } from '~/enums/session-storage-key-enum'
-import { ETodosFilter } from '~/enums/todos-filter-enum'
+import { ESessionStorageKey, ETodosFilter } from '~/enums'
 
 export interface ITodoStore {
   allTodos: ITodo[]
