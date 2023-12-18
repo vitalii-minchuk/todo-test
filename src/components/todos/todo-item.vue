@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ITodoWithLikes } from '~/api/todo/types'
 import { defaultErrorMsg, updateTodoSuccessMsg } from '~/constants'
-import { EFetchStatus } from '~/enums/fetch-status-enum'
+import { EFetchStatus } from '~/enums'
 
 const props = defineProps<{
   todo: ITodoWithLikes

@@ -6,7 +6,7 @@ import {
   defaultErrorMsg,
   invalidCredentialsMsg,
 } from '~/constants'
-import { EFetchStatus } from '~/enums/fetch-status-enum'
+import { EFetchStatus } from '~/enums'
 
 const input = reactive<TCreateTodoInput>({ ...DEFAULT_CREATE_TODO_INPUT })
 const fetchStatus = ref<EFetchStatus>(EFetchStatus.SUCCESS)

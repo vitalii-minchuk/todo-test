@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ETodosFilter } from '~/enums/todos-filter-enum'
+import { ETodosFilter } from '~/enums'
 
 const todoStore = useTodoStore()
 const text = ref('')

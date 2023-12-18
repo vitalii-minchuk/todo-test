@@ -10,7 +10,7 @@
 <style lang="scss">
 .custom-notification {
   // styling
-  margin: 0 5px 5px;
+  margin: 5px;
   padding: 10px;
   font-size: 12px;
   color: #000000;

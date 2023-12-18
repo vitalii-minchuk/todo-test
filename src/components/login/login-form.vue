@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { DEFAULT_LOGIN_USER_INPUT, defaultErrorMsg, invalidCredentialsMsg, loginSuccessMsg } from '~/constants'
-import { EFetchStatus } from '~/enums/fetch-status-enum'
+import { EFetchStatus } from '~/enums'
 import type { ILoginUserInput } from '~/types/login'
 
 const input = reactive<ILoginUserInput>({ ...DEFAULT_LOGIN_USER_INPUT })
