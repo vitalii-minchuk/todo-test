@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DEFAULT_LOGIN_USER_INPUT, defaultErrorMsg, loginSuccessMsg } from '~/constants'
+import { DEFAULT_LOGIN_USER_INPUT, defaultErrorMsg, invalidCredentialsMsg, loginSuccessMsg } from '~/constants'
 import { EFetchStatus } from '~/enums/fetch-status-enum'
 import type { ILoginUserInput } from '~/types/login'
 
@@ -55,32 +55,40 @@ function onSubmitWithoutCredentials() {
 </script>
 
 <template>
-  <v-form validate-on="input lazy" @submit.prevent="onSubmit">
-    <v-text-field
-      v-model="input.userName"
-      label="User name"
-      name="userName"
-      :rules="[fieldRules.required, fieldRules.onlyLetters, fieldRules.lengthValue]"
-    />
-    <v-text-field
-      v-model="input.phone"
-      label="Phone"
-      name="phone"
-      :rules="[fieldRules.required, fieldRules.isPhone]"
-    />
-    <v-btn
-      :loading="isLoading"
-      type="submit"
-      block
-      class="mt-2"
-      text="Submit"
-    />
-    <p v-if="isError">
-      errror
+  <v-card class="mx-auto py-4" max-width="500">
+    <v-form validate-on="input lazy" @submit.prevent="onSubmit">
+      <v-col class="d-flex flex-column">
+        <v-text-field
+          v-model="input.userName"
+          label="User name"
+          variant="outlined"
+          name="userName"
+          class="mb-4"
+          :rules="[fieldRules.required, fieldRules.onlyLetters, fieldRules.lengthValue]"
+        />
+        <v-text-field
+          v-model="input.phone"
+          label="Phone"
+          variant="outlined"
+          name="phone"
+          class="mb-4"
+          :rules="[fieldRules.required, fieldRules.isPhone]"
+        />
+        <v-btn
+          :loading="isLoading"
+          type="submit"
+          block
+          class="mb-4"
+          text="Submit"
+        />
+
+        <v-btn v-if="!isLoading" block type="button" @click="onSubmitWithoutCredentials">
+          auto-submit
+        </v-btn>
+      </v-col>
+    </v-form>
+    <p v-if="isError" class="text-red text-center">
+      {{ invalidCredentialsMsg }}
     </p>
-  </v-form>
-  <v-btn v-if="!isLoading" @click="onSubmitWithoutCredentials">
-    auto-submit
-  </v-btn>
+  </v-card>
 </template>
-~/enums/fetch-status-enum

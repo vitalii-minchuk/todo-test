@@ -43,9 +43,9 @@ function onSubmit(): void {
 
 <template>
   <v-dialog
-    v-model="modalsStore.getCreateTodoModal"
+    :model-value="modalsStore.getCreateTodoModal"
     width="auto"
-    close-on-back
+    persistent
   >
     <v-card>
       <v-card-text>

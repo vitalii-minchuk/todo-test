@@ -12,6 +12,7 @@ const fetchStatus = ref<EFetchStatus>(EFetchStatus.SUCCESS)
 const { notifyError, notifySuccess } = useNotify()
 const completed = ref(props.todo.completed)
 const isFavorite = ref(props.todo.isFavorite)
+const showTooltip = ref(false)
 
 const isLoading = computed<boolean>(() => fetchStatus.value === EFetchStatus.PENDING)
 
@@ -35,8 +36,24 @@ function toggleIsFavorite(): void {
 </script>
 
 <template>
-  <div>{{ props.todo.title }}</div>
-  <v-checkbox v-model="completed" :disabled="isLoading" @update:model-value="onUpdate" />
-  <v-checkbox v-model="isFavorite" :disabled="isLoading" @update:model-value="toggleIsFavorite" />
+  <v-card width="200" height="100">
+    <v-tooltip
+      v-model="showTooltip"
+      location="top"
+    >
+      <span>{{ props.todo.title }}</span>
+    </v-tooltip>
+
+    <template #subtitle>
+      <p @on-hover="showTooltip = true">
+        {{ props.todo.title }}
+      </p>
+    </template>
+
+    <template #text>
+      <v-checkbox v-model="completed" label="Completed" :disabled="isLoading" @update:model-value="onUpdate" />
+
+      <v-checkbox v-model="isFavorite" true-icon="mdi-heart" :disabled="isLoading" @update:model-value="toggleIsFavorite" />
+    </template>
+  </v-card>
 </template>
-~/enums/fetch-status-enum

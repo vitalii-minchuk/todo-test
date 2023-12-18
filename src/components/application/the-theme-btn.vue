@@ -4,9 +4,6 @@ const { isDark, toggleTheme } = useTheme()
 
 <template>
   <v-btn
-    class="mr-1"
-    icon
-    size="small"
     @click="toggleTheme()"
   >
     <v-icon size="large">
